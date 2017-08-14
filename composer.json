@@ -11,7 +11,7 @@
         "stevegrunwell/wp-enforcer": "^0.4.1"
     },
     "autoload": {
-        "classmap": [
+        "files": [
             "wp-bootstrap-navwalker.php" 
          ]
     },
