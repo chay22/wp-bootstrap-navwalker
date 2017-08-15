@@ -83,16 +83,18 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$class_names = $value;
 				$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 				$classes[] = 'menu-item-' . $item->ID;
-				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+				//$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+				$class_names = 'menu-' . sanitize_title(apply_filters( 'the_title', $item->title, $item->ID ));
 				if ( $args->has_children ) {
 					$class_names .= ' dropdown';
 				}
+				
 				if ( in_array( 'current-menu-item', $classes, true ) ) {
 					$class_names .= ' active';
 				}
 				$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 				$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
-				$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+				$id = $id && $id !== 'menu-item-' . $item->ID ? ' id="' . esc_attr( $id ) . '"' : '';
 				$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $value . $class_names . '>';
 				$atts = array();
 
